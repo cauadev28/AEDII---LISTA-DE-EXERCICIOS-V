@@ -3,72 +3,49 @@
 
 struct Node {
     int data;
-    struct Node* next;
+    struct Node *next;
 };
 
-
-struct LinkedList {
-    struct Node* head;
-};
-
-void inicializarLista(struct LinkedList* lista) {
-    lista->head = NULL;
+int countNodes(struct Node *head) {
+    int count = 0;
+    struct Node *current = head;
+    
+    while (current != NULL) {
+        count++;
+        current = current->next;
+    }
+    
+    return count;
 }
 
-void inserirNoFinal(struct LinkedList* lista, int valor) {
-
-    struct Node* novoNo = (struct Node*) malloc(sizeof(struct Node));
-    novoNo->data = valor;
-    novoNo->next = NULL;
-
-    if (lista->head == NULL) {
-        lista->head = novoNo;
+void insertAtEnd(struct Node **head_ref, int new_data) {
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    new_node->data = new_data;
+    new_node->next = NULL;
+    
+    if (*head_ref == NULL) {
+        *head_ref = new_node;
         return;
     }
-
-    struct Node* atual = lista->head;
-    while (atual->next != NULL) {
-        atual = atual->next;
+    
+    struct Node *last = *head_ref;
+    while (last->next != NULL) {
+        last = last->next;
     }
-
-    atual->next = novoNo;
-}
-
-int contarElementos(struct LinkedList* lista) {
-    int contador = 0;
-    struct Node* atual = lista->head;
-
-    while (atual != NULL) {
-        contador++;
-        atual = atual->next;
-    }
-
-    return contador;
-}
-
-void imprimirLista(struct LinkedList* lista) {
-    struct Node* atual = lista->head;
-    while (atual != NULL) {
-        printf("%d -> ", atual->data);
-        atual = atual->next;
-    }
-    printf("NULL\n");
+    
+    last->next = new_node;
 }
 
 int main() {
-    struct LinkedList lista;
-
-    inicializarLista(&lista);
-
-    inserirNoFinal(&lista, 10);
-    inserirNoFinal(&lista, 20);
-    inserirNoFinal(&lista, 30);
-
-    printf("Lista encadeada: ");
-    imprimirLista(&lista);
-
-    int numElementos = contarElementos(&lista);
-    printf("Número de elementos na lista: %d\n", numElementos);
-
+    struct Node *head = NULL; 
+    
+    insertAtEnd(&head, 1);
+    insertAtEnd(&head, 2);
+    insertAtEnd(&head, 3);
+    
+    int numNodes = countNodes(head);
+    
+    printf("Numero de elementos na lista: %d\n", numNodes);
+    
     return 0;
 }
