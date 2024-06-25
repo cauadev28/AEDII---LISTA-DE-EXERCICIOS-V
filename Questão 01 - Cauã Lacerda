@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+double calculandoM(int array[], int tamanho) {
+    int soma = 0;
+    for (int i = 0; i < tamanho; i++) {
+        soma += array[i];
+    }
+    return (double)soma / tamanho; 
+}
+
+int main() {
+    int tamanho;
+
+    printf("Informe o tamanho do array: ");
+    scanf("%d", &tamanho);
+
+    if (tamanho <= 0) {
+        printf("Tamanho inválido. Por favor, informe um valor maior que zero.\n");
+        return 1; 
+    }
+
+    int *array = (int *)malloc(tamanho * sizeof(int));
+
+    if (array == NULL) {
+        printf("Erro ao alocar memória para o array.\n");
+        return 1; 
+    }
+
+    srand(time(NULL)); 
+    for (int i = 0; i < tamanho; i++) {
+        array[i] = rand() % 100; 
+    }
+
+    double media = calculandoM(array, tamanho);
+
+    printf("Valores do array:\n");
+    for (int i = 0; i < tamanho; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+
+    printf("A média dos valores do array é: %.2f\n", media);
+
+    free(array);
+
+    return 0;
+}
