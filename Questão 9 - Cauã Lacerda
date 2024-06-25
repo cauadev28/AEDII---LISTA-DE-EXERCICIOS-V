@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+struct LinkedList {
+    struct Node* head;
+};
+
+void inicializarLista(struct LinkedList* lista) {
+    lista->head = NULL;
+}
+
+void inserirNoFinal(struct LinkedList* lista, int valor) {
+
+    struct Node* novoNo = (struct Node*) malloc(sizeof(struct Node));
+    novoNo->data = valor;
+    novoNo->next = NULL;
+
+    if (lista->head == NULL) {
+        lista->head = novoNo;
+        return;
+    }
+
+    struct Node* atual = lista->head;
+    while (atual->next != NULL) {
+        atual = atual->next;
+    }
+
+    atual->next = novoNo;
+}
+
+int contarElementos(struct LinkedList* lista) {
+    int contador = 0;
+    struct Node* atual = lista->head;
+
+    while (atual != NULL) {
+        contador++;
+        atual = atual->next;
+    }
+
+    return contador;
+}
+
+void imprimirLista(struct LinkedList* lista) {
+    struct Node* atual = lista->head;
+    while (atual != NULL) {
+        printf("%d -> ", atual->data);
+        atual = atual->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct LinkedList lista;
+
+    inicializarLista(&lista);
+
+    inserirNoFinal(&lista, 10);
+    inserirNoFinal(&lista, 20);
+    inserirNoFinal(&lista, 30);
+
+    printf("Lista encadeada: ");
+    imprimirLista(&lista);
+
+    int numElementos = contarElementos(&lista);
+    printf("Número de elementos na lista: %d\n", numElementos);
+
+    return 0;
+}
