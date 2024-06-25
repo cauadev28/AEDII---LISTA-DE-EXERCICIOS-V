@@ -6,61 +6,46 @@ struct Node {
     struct Node *next;
 };
 
-struct Node* createNode(int data) {
-    struct Node* newNode = (struct Node*) malloc(sizeof(struct Node));
-    if (newNode == NULL) {
-        printf("Erro ao alocar memória para o novo nó.\n");
-        exit(1);
-    }
-    newNode->data = data;
-    newNode->next = NULL;
-    return newNode;
+void insertAtBeginning(struct Node **head_ref, int new_data) {
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    new_node->data = new_data;
+    new_node->next = *head_ref;
+    *head_ref = new_node;
 }
 
-void removeFirst(struct Node **head) {
-    if (*head == NULL) {
-        printf("A lista encadeada está vazia. Não há elementos para remover.\n");
+void deleteFirstNode(struct Node **head_ref) {
+    if (*head_ref == NULL) {
+        printf("Lista encadeada está vazia. Não há elementos para remover.\n");
         return;
     }
     
-    struct Node *temp = *head;
-    *head = (*head)->next;
+    struct Node *temp = *head_ref; 
+    *head_ref = (*head_ref)->next;
     free(temp);
 }
 
-void printList(struct Node *head) {
-    struct Node *temp = head;
-    while (temp != NULL) {
-        printf("%d ", temp->data);
-        temp = temp->next;
+void printList(struct Node *node) {
+    while (node != NULL) {
+        printf("%d -> ", node->data);
+        node = node->next;
     }
-    printf("\n");
+    printf("NULL\n");
 }
 
 int main() {
     struct Node *head = NULL;
     
-
-    head = createNode(1);
-    head->next = createNode(2);
-    head->next->next = createNode(3);
+    insertAtBeginning(&head, 3);
+    insertAtBeginning(&head, 2);
+    insertAtBeginning(&head, 1);
     
-    printf("Lista inicial: ");
-    printList(head); 
+    printf("Lista encadeada antes da remoção: ");
+    printList(head);
     
-    removeFirst(&head);
-    printf("Lista após remover o primeiro elemento: ");
-    printList(head); 
+    deleteFirstNode(&head);
     
-    removeFirst(&head);
-    printf("Lista após remover o primeiro elemento novamente: ");
-    printList(head); 
-    
-    removeFirst(&head);
-    printf("Lista após remover o único elemento restante: ");
-    printList(head); 
-    
-    removeFirst(&head); 
+    printf("Lista encadeada após a remoção: ");
+    printList(head);
     
     return 0;
 }
