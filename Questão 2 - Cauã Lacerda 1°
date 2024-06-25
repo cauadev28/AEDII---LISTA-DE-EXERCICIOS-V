@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int ehVogal(char ch) {
+    ch = tolower(ch);
+    return (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u');
+}
+
+int contandoC(char *str) {
+    int consoantes = 0;
+    while (*str) {
+        if (isalpha(*str) && !ehVogal(*str)) {
+            consoantes++;
+        }
+        str++;
+    }
+    return consoantes;
+}
+
+int main() {
+    char string[100];
+    printf("Digite uma string: ");
+    fgets(string, sizeof(string), stdin);
+    if (string[strlen(string) - 1] == '\n') {
+        string[strlen(string) - 1] = '\0';
+    }
+    int numConsoantes = contandoC(string);
+    printf("Número de consoantes na string: %d\n", numConsoantes);
+    return 0;
+}
