@@ -14,9 +14,9 @@ bool mesmoM(struct Carro carro1, struct Carro carro2) {
 
 int main() {
 
-    struct Carro carro1 = {"Toyota", "Corolla", 2020};
-    struct Carro carro2 = {"Honda", "Civic", 2019};
-    struct Carro carro3 = {"Toyota", "Corolla", 2021};
+    struct Carro carro1 = {"Bmw", "X6", 2020};
+    struct Carro carro2 = {"Toyota", "Hilux", 2019};
+    struct Carro carro3 = {"Bmw", "X1", 2021};
 
     if (mesmoM(carro1, carro2)) {
         printf("%s %s é do mesmo modelo que %s %s.\n", carro1.marca, carro1.modelo, carro2.marca, carro2.modelo);
