@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+const char* calculacaoIM(float peso, float altura) {
+    float imc = peso / (altura * altura);
+
+    if (imc < 18.5) {
+        return "Abaixo do peso";
+    } else if (imc >= 18.5 && imc < 25) {
+        return "Peso normal";
+    } else if (imc >= 25 && imc < 30) {
+        return "Sobrepeso";
+    } else if (imc >= 30 && imc < 35) {
+        return "Obesidade (grau I)";
+    } else if (imc >= 35 && imc < 40) {
+        return "Obesidade (grau II)";
+    } else {
+        return "Obesidade mórbida (grau III)";
+    }
+}
+
+int main() {
+    float peso, altura;
+
+    printf("Digite seu peso em kg: ");
+    scanf("%f", &peso);
+    printf("Digite sua altura em metros: ");
+    scanf("%f", &altura);
+
+    const char *faixa = calculacaoIM(peso, altura);
+    printf("Seu IMC indica: %s\n", faixa);
+
+    return 0;
+}
