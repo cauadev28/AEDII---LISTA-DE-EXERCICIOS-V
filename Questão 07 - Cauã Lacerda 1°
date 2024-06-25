@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+
+struct Carro {
+    char marca[50];
+    char modelo[50];
+    int anoFabricacao;
+};
+
+bool mesmoM(struct Carro carro1, struct Carro carro2) {
+    return strcmp(carro1.modelo, carro2.modelo) == 0;
+}
+
+int main() {
+
+    struct Carro carro1 = {"Toyota", "Corolla", 2020};
+    struct Carro carro2 = {"Honda", "Civic", 2019};
+    struct Carro carro3 = {"Toyota", "Corolla", 2021};
+
+    if (mesmoM(carro1, carro2)) {
+        printf("%s %s é do mesmo modelo que %s %s.\n", carro1.marca, carro1.modelo, carro2.marca, carro2.modelo);
+    } else {
+        printf("%s %s não é do mesmo modelo que %s %s.\n", carro1.marca, carro1.modelo, carro2.marca, carro2.modelo);
+    }
+
+    if (mesmoM(carro1, carro3)) {
+        printf("%s %s é do mesmo modelo que %s %s.\n", carro1.marca, carro1.modelo, carro3.marca, carro3.modelo);
+    } else {
+        printf("%s %s não é do mesmo modelo que %s %s.\n", carro1.marca, carro1.modelo, carro3.marca, carro3.modelo);
+    }
+
+    return 0;
+}
