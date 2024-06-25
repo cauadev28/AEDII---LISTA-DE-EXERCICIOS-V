@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Livro {
+    char titulo[100];
+    char autor[100];
+    int anoPublicacao;
+};
+
+struct Livro livroMaisRecente(struct Livro livros[4]) {
+    struct Livro maisRecente = livros[0];
+
+    for (int i = 1; i < 4; i++) {
+        if (livros[i].anoPublicacao > maisRecente.anoPublicacao) {
+            maisRecente = livros[i];
+        }
+    }
+
+    return maisRecente;
+}
+
+int main() {
+    struct Livro livros[4];
+
+    strcpy(livros[0].titulo, "Dom Casmurro");
+    strcpy(livros[0].autor, "Machado de Assis");
+    livros[0].anoPublicacao = 1899;
+
+    strcpy(livros[1].titulo, "O Senhor dos Anéis");
+    strcpy(livros[1].autor, "J.R.R. Tolkien");
+    livros[1].anoPublicacao = 1954;
+
+    strcpy(livros[2].titulo, "1984");
+    strcpy(livros[2].autor, "George Orwell");
+    livros[2].anoPublicacao = 1949;
+
+    strcpy(livros[3].titulo, "Harry Potter e a Pedra Filosofal");
+    strcpy(livros[3].autor, "J.K. Rowling");
+    livros[3].anoPublicacao = 1997;
+
+    struct Livro maisRecente = livroMaisRecente(livros);
+
+    printf("Livro mais recente:\n");
+    printf("Título: %s\n", maisRecente.titulo);
+    printf("Autor: %s\n", maisRecente.autor);
+    printf("Ano de Publicação: %d\n", maisRecente.anoPublicacao);
+
+    return 0;
+}
