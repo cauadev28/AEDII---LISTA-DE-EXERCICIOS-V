@@ -3,56 +3,46 @@
 
 struct Node {
     int data;
-    struct Node* next;
+    struct Node *next;
 };
 
-struct LinkedList {
-    struct Node* head;
-};
-
-void inicializarLista(struct LinkedList* lista) {
-    lista->head = NULL;
-}
-
-void inserirNoFinal(struct LinkedList* lista, int valor) {
-
-    struct Node* novoNo = (struct Node*) malloc(sizeof(struct Node));
-    novoNo->data = valor;
-    novoNo->next = NULL;
-
-    if (lista->head == NULL) {
-        lista->head = novoNo;
+void insertAtEnd(struct Node **head_ref, int new_data) {
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    
+    new_node->data = new_data;
+    new_node->next = NULL; 
+    
+    if (*head_ref == NULL) {
+        *head_ref = new_node;
         return;
     }
-
-    struct Node* atual = lista->head;
-    while (atual->next != NULL) {
-        atual = atual->next;
+    
+    struct Node *last = *head_ref;
+    while (last->next != NULL) {
+        last = last->next;
     }
-
-    atual->next = novoNo;
+    
+    last->next = new_node;
 }
 
-void imprimirLista(struct LinkedList* lista) {
-    struct Node* atual = lista->head;
-    while (atual != NULL) {
-        printf("%d -> ", atual->data);
-        atual = atual->next;
+void printList(struct Node *node) {
+    while (node != NULL) {
+        printf("%d -> ", node->data);
+        node = node->next;
     }
     printf("NULL\n");
 }
 
+// Função principal
 int main() {
-    struct LinkedList lista;
-
-    inicializarLista(&lista);
-
-    inserirNoFinal(&lista, 10);
-    inserirNoFinal(&lista, 20);
-    inserirNoFinal(&lista, 30);
-
+    struct Node *head = NULL; 
+    
+    insertAtEnd(&head, 1);
+    insertAtEnd(&head, 2);
+    insertAtEnd(&head, 3);
+    
     printf("Lista encadeada: ");
-    imprimirLista(&lista);
-
+    printList(head);
+    
     return 0;
 }
