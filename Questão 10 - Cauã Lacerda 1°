@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*) malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        printf("Erro ao alocar memória para o novo nó.\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void removeFirst(struct Node **head) {
+    if (*head == NULL) {
+        printf("A lista encadeada está vazia. Não há elementos para remover.\n");
+        return;
+    }
+    
+    struct Node *temp = *head;
+    *head = (*head)->next;
+    free(temp);
+}
+
+void printList(struct Node *head) {
+    struct Node *temp = head;
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    struct Node *head = NULL;
+    
+
+    head = createNode(1);
+    head->next = createNode(2);
+    head->next->next = createNode(3);
+    
+    printf("Lista inicial: ");
+    printList(head); 
+    
+    removeFirst(&head);
+    printf("Lista após remover o primeiro elemento: ");
+    printList(head); 
+    
+    removeFirst(&head);
+    printf("Lista após remover o primeiro elemento novamente: ");
+    printList(head); 
+    
+    removeFirst(&head);
+    printf("Lista após remover o único elemento restante: ");
+    printList(head); 
+    
+    removeFirst(&head); 
+    
+    return 0;
+}
